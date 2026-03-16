@@ -1,0 +1,14 @@
+C:\Users\uiv10434\source\repos\SmartHome\bin\Debug\net8.0\SmartHome.exe
+C:\Users\uiv10434\source\repos\SmartHome\bin\Debug\net8.0\SmartHome.deps.json
+C:\Users\uiv10434\source\repos\SmartHome\bin\Debug\net8.0\SmartHome.runtimeconfig.json
+C:\Users\uiv10434\source\repos\SmartHome\bin\Debug\net8.0\SmartHome.dll
+C:\Users\uiv10434\source\repos\SmartHome\bin\Debug\net8.0\SmartHome.pdb
+C:\Users\uiv10434\source\repos\SmartHome\obj\Debug\net8.0\SmartHome.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\uiv10434\source\repos\SmartHome\obj\Debug\net8.0\SmartHome.AssemblyInfoInputs.cache
+C:\Users\uiv10434\source\repos\SmartHome\obj\Debug\net8.0\SmartHome.AssemblyInfo.cs
+C:\Users\uiv10434\source\repos\SmartHome\obj\Debug\net8.0\SmartHome.csproj.CoreCompileInputs.cache
+C:\Users\uiv10434\source\repos\SmartHome\obj\Debug\net8.0\SmartHome.dll
+C:\Users\uiv10434\source\repos\SmartHome\obj\Debug\net8.0\refint\SmartHome.dll
+C:\Users\uiv10434\source\repos\SmartHome\obj\Debug\net8.0\SmartHome.pdb
+C:\Users\uiv10434\source\repos\SmartHome\obj\Debug\net8.0\SmartHome.genruntimeconfig.cache
+C:\Users\uiv10434\source\repos\SmartHome\obj\Debug\net8.0\ref\SmartHome.dll
