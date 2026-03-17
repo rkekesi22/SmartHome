@@ -51,6 +51,15 @@ namespace SmartHome.Controllers
                 {
                     devices.OfType<Light>().ToList().ForEach (d => d.TurnOff());
                 }
+
+                if (sensor is FakeSensor && value < 20)
+                {
+                    devices.OfType<Heater>().ToList().ForEach(d => d.TurnOn());
+                }
+                else if (sensor is FakeSensor && value > 20)
+                {
+                    devices.OfType<Heater>().ToList().ForEach(d => d.TurnOff());
+                }
             }
         }
     }
