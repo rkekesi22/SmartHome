@@ -1,4 +1,8 @@
-﻿namespace SmartHome
+﻿using SmartHome.Controllers;
+using SmartHome.Devices;
+using SmartHome.Sensors;
+
+namespace SmartHome
 {
     class Program
     {
