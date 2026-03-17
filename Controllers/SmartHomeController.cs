@@ -1,4 +1,5 @@
-﻿using SmartHome.Devices;
+﻿using SmartHome.ControlLogic;
+using SmartHome.Devices;
 using SmartHome.Sensors;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,9 @@ namespace SmartHome.Controllers
         private readonly List<ISensor> sensors = new();
         private readonly List<Device> devices = new();
 
+        private readonly HeaterStateMachine heaterFsm = new HeaterStateMachine(20.0, 23.0);
+        private readonly LightStateMachine lightFsm = new LightStateMachine(30, 50);
+
         public void AddSensor(ISensor sensor)
         {
             sensors.Add(sensor);
@@ -27,40 +31,60 @@ namespace SmartHome.Controllers
         
         public void Update()
         {
+
+            double? lastTemperature = null;
+            int? lastLightLevel = null;
+
             foreach (var sensor in sensors)
             {
-                double value = sensor.ReadValue();
+                var value = sensor.ReadValue();
                 Console.WriteLine($"[{sensor.Name}] value: {value}");
 
-                if (sensor is TemperatureSensor && value < 20)
-                {
-                    //OfType - Only Heater type select
-                    devices.OfType<Heater>().ToList().ForEach(d => d.TurnOn());
-                }
-                else if (sensor is TemperatureSensor && value > 23)
-                {
-                    devices.OfType<Heater>().ToList().ForEach(d => d.TurnOff());
-                }
+                if (sensor is TemperatureSensor)
+                    lastTemperature = value;
 
-                if( sensor is LightSensor && value < 30)
-                {
-                    //OfType - Only Light type select
-                    devices.OfType<Light>().ToList().ForEach(d => d.TurnOn());
-                }
-                else if ( sensor is LightSensor && value > 50)
-                {
-                    devices.OfType<Light>().ToList().ForEach (d => d.TurnOff());
-                }
 
-                if (sensor is FakeSensor && value < 20)
+                if( sensor is LightSensor)
                 {
-                    devices.OfType<Heater>().ToList().ForEach(d => d.TurnOn());
-                }
-                else if (sensor is FakeSensor && value > 20)
-                {
-                    devices.OfType<Heater>().ToList().ForEach(d => d.TurnOff());
+                    lastLightLevel = (int)Math.Round(value);
                 }
             }
+
+            if (lastTemperature.HasValue)
+            {
+                heaterFsm.Update(lastTemperature.Value);
+            }
+
+            if( lastLightLevel.HasValue)
+            {
+                lightFsm.Update(lastLightLevel.Value);
+            }
+
+
+            foreach (var heater in devices.OfType<Heater>())
+            {
+                if( heaterFsm.State == HeaterState.Heating && !heater.IsOn)
+                {
+                    heater.TurnOn();
+                }
+                else if (heaterFsm.State == HeaterState.Off && heater.IsOn)
+                {
+                    heater.TurnOff();
+                }
+            }
+
+            foreach(var light in devices.OfType<Light>())
+            {
+                if( lightFsm.State == LightState.On && !light.IsOn)
+                {
+                    light.TurnOn();
+                }
+                else if( lightFsm.State == LightState.Off && light.IsOn)
+                {
+                    light.TurnOff();
+                }
+            }
+
         }
     }
 }
