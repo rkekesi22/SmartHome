@@ -31,16 +31,18 @@ namespace SmartHome.ControlLogic
 
         public void Update(int lightLevel)
         {
-            switch(State) {
+            switch (State)
+            {
                 case LightState.Off:
                     if (lightLevel < onThreshold)
                         State = LightState.On;
-                break;
-                
+                    break;
+
                 case LightState.On:
-                    if( lightLevel > offThreshold)
+                    if (lightLevel > offThreshold)
                         State = LightState.Off;
                     break;
+            }
         }
     }
 }
