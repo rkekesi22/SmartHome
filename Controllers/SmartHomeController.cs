@@ -48,6 +48,12 @@ namespace SmartHome.Controllers
                 {
                     lastLightLevel = (int)Math.Round(value);
                 }
+
+                if(sensor is FakeSensor)
+                {
+                    lastTemperature = value;
+                }
+
             }
 
             if (lastTemperature.HasValue)
