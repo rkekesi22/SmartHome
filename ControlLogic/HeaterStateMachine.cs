@@ -13,8 +13,18 @@ namespace SmartHome.ControlLogic
     }
     public class HeaterStateMachine
     {
-        private readonly double onThreshold; //pl :20 fok alatt kapcsoljon be
-        private readonly double offThreshold; //pl :23 fok felett kapcsoljon be
+        private double onThreshold; //pl :20 fok alatt kapcsoljon be
+        private double offThreshold; //pl :23 fok felett kapcsoljon be
+
+        public double OnThresHold {
+            get => onThreshold;
+            set => onThreshold = value;
+        }
+        public double OffThresHold
+        {
+            get => offThreshold;
+            set => offThreshold = value;
+        }
 
         public HeaterState State { get; private set; } = HeaterState.Off;
         

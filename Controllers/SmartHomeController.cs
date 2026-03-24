@@ -15,8 +15,24 @@ namespace SmartHome.Controllers
         private readonly List<ISensor> sensors = new();
         private readonly List<Device> devices = new();
 
+
         private readonly HeaterStateMachine heaterFsm = new HeaterStateMachine(20.0, 23.0);
         private readonly LightStateMachine lightFsm = new LightStateMachine(30, 50);
+
+        public double HeaterOnThresHold
+        {
+            get => heaterFsm.OnThresHold;
+            set => heaterFsm.OnThresHold = value;
+        }
+
+        public double HeaterOffThresHold
+        {
+            get => heaterFsm.OffThresHold;
+            set => heaterFsm.OffThresHold = value;
+        }
+
+        public IReadOnlyList<ISensor> Sensors => sensors;
+        public IReadOnlyList<Device> Devices => devices;
 
         public void AddSensor(ISensor sensor)
         {
@@ -28,7 +44,7 @@ namespace SmartHome.Controllers
             devices.Add(device);
         }
 
-        
+
         public void Update()
         {
 
