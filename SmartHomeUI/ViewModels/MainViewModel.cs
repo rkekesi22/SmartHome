@@ -39,13 +39,26 @@ namespace SmartHomeUI.ViewModels
             }
         }
 
-        private double _targetTemperature;
-        public double TargetTemperature
+        public double OnThresHold
         {
-            get => _targetTemperature;
+            get => _smartHomeController.HeaterOnThresHold;
             set
             {
-                _targetTemperature = value;
+                if( value < OffThresHold)
+                {
+                    _smartHomeController.HeaterOnThresHold = value;
+                    OnPropertyChanged();
+                }
+                
+            }
+        }
+
+        public double OffThresHold
+        {
+            get => _smartHomeController.HeaterOffThresHold;
+            set
+            {
+                _smartHomeController.HeaterOffThresHold = value;
                 OnPropertyChanged();
             }
         }

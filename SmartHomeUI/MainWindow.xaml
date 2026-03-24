@@ -8,14 +8,19 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-            <CheckBox Content="Szenzor bekapcsolva"
-              IsChecked="{Binding IsMonitoring}"
-              HorizontalAlignment="Center"
-              Margin="10"/>
+            <TextBlock Text="Bekapcsolási fok"/>
+            <Slider Minimum="10" Maximum="30" Value="{Binding OnThresHold, StringFormat=F2}" Width="200"/>
+
+            <TextBlock Text="{Binding OnThresHold, StringFormat=F2}"/>
+
+            <TextBlock Text="Kikapcsolási fok"/>
+            <Slider Minimum="10" Maximum="30" Value="{Binding OffThresHold, StringFormat=F2}" Width="200"/>
+
+            <TextBlock Text="{Binding OffThresHold, StringFormat=F2}"/>
 
             <TextBlock Text="Hőmérséklet" FontSize="20" HorizontalAlignment="Center"/>
 
-            <TextBlock Text="{Binding Temperature}"
+            <TextBlock Text="{Binding Temperature, StringFormat=F2}"
                FontSize="40"
                HorizontalAlignment="Center"/>
 
